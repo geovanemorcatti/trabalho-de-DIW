@@ -22,6 +22,7 @@ function MostraFilmesEmCartaz() {
                 titulo = data.results[i].title;
                 imagem = 'https://image.tmdb.org/t/p/w500' + data.results[i].poster_path;
                 descricao = data.results[i].overview;
+                id = data.results[i].id
 
                 codigo_html += `<div class="col-sm-7 col-md-5 col-lg-4 "><div class="card" style="width: 18rem;">
                 <img src="${imagem}" class="card-img-top"
@@ -29,7 +30,7 @@ function MostraFilmesEmCartaz() {
                 <div class="card-body">
                     <h5 id = "j" class="card-title">${titulo}</h5>
                     <p class="card-text">${descricao}</p>
-                    <a href="detalhes.html"" class="btn btn-primary">Abrir filme</a>
+                    <a href="${'https://www.themoviedb.org/movie/' + id}"" class="btn btn-primary">Abrir filme</a>
                 </div>
             </div></div>`;
 
@@ -79,7 +80,7 @@ function PesquisaFilmes() {
                 <div class="card-body">
                     <h5 id = "j" class="card-title">${titulo}</h5>
                     <p class="card-text">${descricao}</p>
-                    <a href=""detalhes.html"" class="btn btn-primary">Abrir filme</a>
+                    <a href="<a href="${'https://www.themoviedb.org/movie/' + data.results[i].id}">" class="btn btn-primary">Abrir filme</a>
                 </div>
             </div></div>`;
             }
@@ -91,7 +92,7 @@ function PesquisaFilmes() {
         });
 }
 
-function AbrirDetalhe(let) {
+function AbrirDetalhe() {
     $.ajax({
             // Passar a URL ENDPOINT BASE + /movie/now_playing
             url: TMDB_ENDPOINT_BASE + '/search/movie',
@@ -104,7 +105,7 @@ function AbrirDetalhe(let) {
                 //jovem.consolelog()
                 //query: $("#jovem").val(),
 
-                //query:$()
+                query: $('j').val,
             }
 
 
@@ -115,14 +116,15 @@ function AbrirDetalhe(let) {
             let codigo_html = '';
 
             // Montar os cards
-            for (i = 0; i < data.results.length; i++) {
+            // for (i = 0; i < data.results.length; i++) {
 
-                // Concatenar o código do Card com os dados do JSON
-                titulo = data.results[i].title;
-                imagem = 'https://image.tmdb.org/t/p/w500' + data.results[i].poster_path;
-                descricao = data.results[i].overview;
-
-                codigo_html += `<div class="col-sm-7 col-md-5 col-lg-4 "><div class="card" style="width: 18rem;">
+            // Concatenar o código do Card com os dados do JSON
+            titulo = data.results.title;
+            console.log(titulo.val)
+            imagem = 'https://image.tmdb.org/t/p/w500' + data.results.poster_path;
+            descricao = data.results.overview;
+            console.log(descricao.val)
+            codigo_html += `<div class="col-sm-7 col-md-5 col-lg-4 "><div class="card" style="width: 18rem;">
                 <img src="${imagem}" class="card-img-top"
                     alt="${titulo}">
                 <div class="card-body">
@@ -131,7 +133,7 @@ function AbrirDetalhe(let) {
                     <a href="detalhes.html" class="btn btn-primary">Abrir filme</a>
                 </div>
             </div></div>`;
-            }
+            // }
             // Repassar os cards para a página
             $("#catazdes").html(codigo_html)
 
@@ -153,19 +155,9 @@ $(document).ready(function() {
     //console.log(form.type)
     $('#BTcarrega').click(PesquisaFilmes);
     //_____________________________________________
-    let jaux = $("j").ready()
-
-    if (jaux.compareTo(data.results[i].title) == 0) {
-        let auxip = data.results.id
-
-    } else {
-        if (i < data.results.length) {
-            i++
-        }
 
 
-    }
-    console.log(auxip)
-    $('#btn btn-primary').click(AbrirDetalhe(auxip))
+
+    //$('#btn btn-primary').click(AbrirDetalhe)
 
 });
