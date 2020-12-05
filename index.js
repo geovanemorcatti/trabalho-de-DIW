@@ -80,7 +80,7 @@ function PesquisaFilmes() {
                 <div class="card-body">
                     <h5 id = "j" class="card-title">${titulo}</h5>
                     <p class="card-text">${descricao}</p>
-                    <a href="<a href="${'https://www.themoviedb.org/movie/' + data.results[i].id}">" class="btn btn-primary">Abrir filme</a>
+                    <a href="${'https://www.themoviedb.org/movie/' + id}"" class="btn btn-primary">Abrir filme</a>
                 </div>
             </div></div>`;
             }
